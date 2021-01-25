@@ -16,15 +16,14 @@ expressions* (this is since it is only used in day of week / day of month, and I
 
 # Build and Run Instructions
 
-Project is using gradle and kotlin, should be ok to run JDK8+,
-though I've personally built it on JDK11.
+Project is using gradle and kotlin, you will need to have JDK11 installed for this.
 
-Run `./gradlew clean build` to run the tests and build an artifact
+Run `./gradlew clean build` to run the tests and build artifacts.
 
 You can run the app itself in a few ways. You can open it in intelliJ and run Application.class 
 (might need to add arguments to run configuration though)
 
-Simplier way would be to run it through gradle:
+Easier way would be to run it through gradle:
 `./gradlew run --args="'0 0 * * * /usr/bin/find'"`
 
 You can also build and run jar file like this:
