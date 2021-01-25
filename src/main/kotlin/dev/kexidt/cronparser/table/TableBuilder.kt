@@ -24,7 +24,7 @@ object TableBuilder {
 
         for (character in chars) {
             if (character.end == null) {
-                 values.add(character.start)
+                values.add(character.start)
             } else {
                 for (i in character.start..character.end step character.increment!!) {
                     values.add(i)

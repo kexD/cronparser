@@ -6,10 +6,11 @@ import dev.kexidt.cronparser.table.TableBuilder
 import dev.kexidt.cronparser.validation.ExpressionValidator
 
 object Application {
-    private val USAGE = """
+    private val USAGE =
+        """
         No cron expression supplied
         Usage: cronparser <expression>
-    """.trimIndent()
+        """.trimIndent()
 
     @JvmStatic
     fun main(args: Array<String>) {

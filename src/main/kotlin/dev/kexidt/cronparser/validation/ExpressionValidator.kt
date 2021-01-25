@@ -1,8 +1,8 @@
 package dev.kexidt.cronparser.validation
 
+import dev.kexidt.cronparser.model.CharacterType
 import dev.kexidt.cronparser.model.CronCharacter
 import dev.kexidt.cronparser.model.Expression
-import dev.kexidt.cronparser.model.CharacterType
 import dev.kexidt.cronparser.model.exception.InvalidExpressionFormatException
 
 object ExpressionValidator {
@@ -23,12 +23,14 @@ object ExpressionValidator {
     ) {
         if (character.start < constraint.min || character.start > constraint.max) {
             throw InvalidExpressionFormatException(
-                "${constraint.prettyName} of ${character.start} is not in allowed range (${constraint.min}, ${constraint.max})")
+                "${constraint.prettyName} of ${character.start} is not in allowed range (${constraint.min}, ${constraint.max})"
+            )
         }
 
         if (character.end != null && (character.end < constraint.min || character.end > constraint.max)) {
             throw InvalidExpressionFormatException(
-                "${constraint.prettyName} of ${character.end} is not in allowed range (${constraint.min}, ${constraint.max})")
+                "${constraint.prettyName} of ${character.end} is not in allowed range (${constraint.min}, ${constraint.max})"
+            )
         }
     }
 }

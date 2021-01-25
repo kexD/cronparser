@@ -1,8 +1,8 @@
 package dev.kexidt.cronparser.input
 
+import dev.kexidt.cronparser.model.CharacterType
 import dev.kexidt.cronparser.model.CronCharacter
 import dev.kexidt.cronparser.model.Expression
-import dev.kexidt.cronparser.model.CharacterType
 import dev.kexidt.cronparser.model.exception.InvalidExpressionFormatException
 
 object InputParser {
