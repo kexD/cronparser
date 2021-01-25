@@ -1,5 +1,6 @@
 package dev.kexidt.cronparser.input
 
+import dev.kexidt.cronparser.model.CharacterType
 import dev.kexidt.cronparser.model.CronCharacter
 import dev.kexidt.cronparser.model.Expression
 import dev.kexidt.cronparser.model.exception.InvalidExpressionFormatException
@@ -46,43 +47,43 @@ internal class InputParserTest {
 
         @Test
         fun `should parse any character`() {
-            val expected = listOf(CronCharacter(start = 0, end = null, increment = 1))
-            val actual = InputParser.parseCharacters("*")
+            val expected = listOf(CronCharacter(start = 0, end = 59, increment = 1))
+            val actual = InputParser.parseCharacters("*", CharacterType.MIN)
             assertThat(actual).isEqualTo(expected)
         }
 
         @Test
         fun `should parse any with explicit increment`() {
-            val expected = listOf(CronCharacter(start = 0, end = null, increment = 3))
-            val actual = InputParser.parseCharacters("*/3")
+            val expected = listOf(CronCharacter(start = 0, end = 23, increment = 3))
+            val actual = InputParser.parseCharacters("*/3", CharacterType.HOUR)
             assertThat(actual).isEqualTo(expected)
         }
 
         @Test
         fun `should parse exact time`() {
             val expected = listOf(CronCharacter(start = 15, end = null, increment = null))
-            val actual = InputParser.parseCharacters("15")
+            val actual = InputParser.parseCharacters("15", CharacterType.MIN)
             assertThat(actual).isEqualTo(expected)
         }
 
         @Test
         fun `should parse start time with implicit end and explicit increment`() {
-            val expected = listOf(CronCharacter(start = 15, end = null, increment = 5))
-            val actual = InputParser.parseCharacters("15/5")
+            val expected = listOf(CronCharacter(start = 15, end = 31, increment = 5))
+            val actual = InputParser.parseCharacters("15/5", CharacterType.DAY_OF_MONTH)
             assertThat(actual).isEqualTo(expected)
         }
 
         @Test
         fun `should parse start time with explicit end and implicit increment`() {
             val expected = listOf(CronCharacter(start = 10, end = 20, increment = 1))
-            val actual = InputParser.parseCharacters("10-20")
+            val actual = InputParser.parseCharacters("10-20", CharacterType.MIN)
             assertThat(actual).isEqualTo(expected)
         }
 
         @Test
         fun `should parse start time with explicit end increment`() {
             val expected = listOf(CronCharacter(start = 10, end = 20, increment = 3))
-            val actual = InputParser.parseCharacters("10-20/3")
+            val actual = InputParser.parseCharacters("10-20/3", CharacterType.HOUR)
             assertThat(actual).isEqualTo(expected)
         }
 
@@ -90,12 +91,12 @@ internal class InputParserTest {
         fun `should parse multiple characters from part of expression`() {
             val expected = listOf(
                 CronCharacter(start = 10, end = 20, increment = 3),
-                CronCharacter(start = 0, end = null, increment = 20),
+                CronCharacter(start = 0, end = 59, increment = 20),
                 CronCharacter(start = 33, end = null, increment = null),
                 CronCharacter(start = 50, end = 59, increment = 1),
             )
 
-            val actual = InputParser.parseCharacters("10-20/3,*/20,33,50-59")
+            val actual = InputParser.parseCharacters("10-20/3,*/20,33,50-59", CharacterType.MIN)
             assertThat(actual).isEqualTo(expected)
         }
     }
@@ -114,11 +115,11 @@ internal class InputParserTest {
         @Test
         fun `should parse every minute expression correctly`() {
             val expected = Expression(
-                min = listOf(CronCharacter(start = 0, end = null, 1)),
-                hour = listOf(CronCharacter(start = 0, end = null, 1)),
-                dayOfMonth = listOf(CronCharacter(start = 0, end = null, 1)),
-                month = listOf(CronCharacter(start = 0, end = null, 1)),
-                dayOfWeek = listOf(CronCharacter(start = 0, end = null, 1)),
+                min = listOf(CronCharacter(start = 0, end = 59, 1)),
+                hour = listOf(CronCharacter(start = 0, end = 23, 1)),
+                dayOfMonth = listOf(CronCharacter(start = 1, end = 31, 1)),
+                month = listOf(CronCharacter(start = 1, end = 12, 1)),
+                dayOfWeek = listOf(CronCharacter(start = 0, end = 6, 1)),
             )
 
             val actual = InputParser.parseExpression("* * * * *")
