@@ -120,9 +120,10 @@ internal class InputParserTest {
                 dayOfMonth = listOf(CronCharacter(start = 1, end = 31, 1)),
                 month = listOf(CronCharacter(start = 1, end = 12, 1)),
                 dayOfWeek = listOf(CronCharacter(start = 0, end = 6, 1)),
+                command = "/usr/bin/find"
             )
 
-            val actual = InputParser.parseExpression("* * * * *")
+            val actual = InputParser.parseExpression("* * * * * /usr/bin/find")
             assertThat(actual).isEqualTo(expected)
         }
     }

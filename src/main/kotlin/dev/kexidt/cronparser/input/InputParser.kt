@@ -9,15 +9,16 @@ object InputParser {
     fun parseExpression(inputString: String): Expression {
         val parts = inputString.split(" ")
 
-        if (parts.size != 5)
-            throw InvalidExpressionFormatException("Cron expression should have 5 space separated parts")
+        if (parts.size != 6)
+            throw InvalidExpressionFormatException("Cron expression should have 5 space separated parts and a command")
 
         return Expression(
             min = parseCharacters(parts[0], CharacterType.MIN),
             hour = parseCharacters(parts[1], CharacterType.HOUR),
             dayOfMonth = parseCharacters(parts[2], CharacterType.DAY_OF_MONTH),
             month = parseCharacters(parts[3], CharacterType.MONTH),
-            dayOfWeek = parseCharacters(parts[4], CharacterType.DAY_OF_WEEK)
+            dayOfWeek = parseCharacters(parts[4], CharacterType.DAY_OF_WEEK),
+            command = parts[5]
         )
     }
 

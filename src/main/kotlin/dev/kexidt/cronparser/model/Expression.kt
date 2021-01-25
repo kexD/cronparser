@@ -16,4 +16,5 @@ data class Expression(
     val dayOfMonth: List<CronCharacter>,
     val month: List<CronCharacter>,
     val dayOfWeek: List<CronCharacter>,
+    val command: String
 )

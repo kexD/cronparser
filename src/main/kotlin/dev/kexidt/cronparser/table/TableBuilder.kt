@@ -13,7 +13,8 @@ object TableBuilder {
         sb.appendLine(buildRow(expression.hour, CharacterType.HOUR))
         sb.appendLine(buildRow(expression.dayOfMonth, CharacterType.DAY_OF_MONTH))
         sb.appendLine(buildRow(expression.month, CharacterType.MONTH))
-        sb.append(buildRow(expression.dayOfWeek, CharacterType.DAY_OF_WEEK))
+        sb.appendLine(buildRow(expression.dayOfWeek, CharacterType.DAY_OF_WEEK))
+        sb.append("command".padEnd(14) + expression.command)
 
         return sb.toString()
     }
